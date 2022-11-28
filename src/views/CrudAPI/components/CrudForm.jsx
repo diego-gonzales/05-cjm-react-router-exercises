@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const initialForm = {
   name: '',
@@ -8,6 +9,7 @@ const initialForm = {
 
 const CrudForm = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
   const [myForm, setMyForm] = useState(initialForm);
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log('useEffect in action');
@@ -45,6 +47,7 @@ const CrudForm = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
   const handleReset = (e) => {
     setMyForm(initialForm);
     setDataToEdit(null);
+    navigate('/crud-api/table');
   };
 
   return (

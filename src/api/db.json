@@ -24,6 +24,16 @@
       "name": "Hello",
       "type": "World",
       "id": 1669595636140
+    },
+    {
+      "name": "Poke",
+      "type": "Piku",
+      "id": 1669677732909
+    },
+    {
+      "name": "nuevo",
+      "type": "poke",
+      "id": 1669677833859
     }
   ]
 }

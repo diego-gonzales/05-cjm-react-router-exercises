@@ -1,13 +1,6 @@
-import { NavLink } from 'react-router-dom';
-import './Home.css';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
-  let activeStyle = {
-    backgroundColor: '#c9db62',
-    borderRadius: '10px',
-    pointerEvents: 'none',
-  };
-
   return (
     <>
       <header>
@@ -15,20 +8,10 @@ const Home = () => {
         <nav>
           <ul className="list">
             <li className="list__item">
-              <NavLink
-                to="/crud-api"
-                style={({ isActive }) => (isActive ? activeStyle : undefined)}
-              >
-                Crud API
-              </NavLink>
+              <Link to="/crud-api">Crud API</Link>
             </li>
             <li className="list__item">
-              <NavLink
-                to="/song-search"
-                style={({ isActive }) => (isActive ? activeStyle : undefined)}
-              >
-                Song Search
-              </NavLink>
+              <Link to="/song-search">Song Search</Link>
             </li>
           </ul>
         </nav>

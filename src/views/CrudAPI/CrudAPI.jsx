@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { NavLink, Route, Routes, Navigate } from 'react-router-dom';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
 import { helpHttp } from '../../helpers/helpHttp';
@@ -91,47 +91,85 @@ const CrudAPI = () => {
     });
   };
 
+  const activeStyle = {
+    backgroundColor: '#c9db62',
+    borderRadius: '10px',
+    pointerEvents: 'none',
+  };
+
   return (
     <>
       <h2>CRUD API</h2>
-      <section className="grid-1-2">
-        <CrudForm
-          createData={createData}
-          updateData={updateData}
-          dataToEdit={dataToEdit}
-          setDataToEdit={setDataToEdit}
+      <header>
+        <nav>
+          <ul className="list">
+            <li className="list__item">
+              <NavLink
+                to="table"
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              >
+                Pokemons
+              </NavLink>
+            </li>
+            <li className="list__item">
+              <NavLink
+                to="add"
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              >
+                Add
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+      </header>
+
+      <Routes>
+        <Route
+          path="table"
+          element={
+            <>
+              {isLoading && <Loader />}
+              {error && (
+                <Message
+                  message={`Error ${error.status}: ${error.statusText}`}
+                  bgColor="#dc3545"
+                />
+              )}
+
+              {data && (
+                <CrudTable
+                  myData={data}
+                  setDataToEdit={setDataToEdit}
+                  deleteData={deleteData}
+                />
+              )}
+            </>
+          }
         />
-
-        {isLoading && <Loader />}
-        {error && (
-          <Message
-            message={`Error ${error.status}: ${error.statusText}`}
-            bgColor="#dc3545"
-          />
-        )}
-
-        {data && (
-          <CrudTable
-            myData={data}
-            setDataToEdit={setDataToEdit}
-            deleteData={deleteData}
-          />
-        )}
-
-        {/* It's a good option if you initialize the data with an empty array ([]) and not with 'null' ...❤ */}
-        {/* {!isLoading ? (
-          <CrudTable
-            myData={data}
-            setDataToEdit={setDataToEdit}
-            deleteData={deleteData}
-          />
-        ) : (
-          <Loader />
-        )} */}
-      </section>
-      <section>
-        <Outlet />
-      </section>
+        <Route
+          path="add"
+          element={
+            <CrudForm
+              createData={createData}
+              updateData={updateData}
+              dataToEdit={dataToEdit}
+              setDataToEdit={setDataToEdit}
+            />
+          }
+        />
+        <Route
+          path="edit/:id"
+          element={
+            <CrudForm
+              createData={createData}
+              updateData={updateData}
+              dataToEdit={dataToEdit}
+              setDataToEdit={setDataToEdit}
+            />
+          }
+        />
+        <Route path="*" element={<Navigate to="table" />} />
+      </Routes>
     </>
   );
 };
