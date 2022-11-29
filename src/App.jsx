@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/crud-api/*" element={<CrudAPI />} />
-          <Route path="/song-search" element={<SongSearch />} />
+          <Route path="/song-search/*" element={<SongSearch />} />
           <Route path='*' element={<Error404 />} />
         </Routes>
       </Suspense>
