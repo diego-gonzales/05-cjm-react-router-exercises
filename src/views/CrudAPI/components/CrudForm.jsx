@@ -12,7 +12,6 @@ const CrudForm = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('useEffect in action');
     if (dataToEdit) {
       setMyForm(dataToEdit);
     } else {

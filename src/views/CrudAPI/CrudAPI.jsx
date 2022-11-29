@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy } from 'react';
 import { NavLink, Route, Routes, Navigate } from 'react-router-dom';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
@@ -34,7 +34,6 @@ const CrudAPI = () => {
   }, []);
 
   const createData = (newElement) => {
-    // console.log(newData);
     newElement.id = Date.now();
 
     const options = {
@@ -152,7 +151,7 @@ const CrudAPI = () => {
             <CrudForm
               createData={createData}
               updateData={updateData}
-              dataToEdit={dataToEdit}
+              dataToEdit={null}
               setDataToEdit={setDataToEdit}
             />
           }
